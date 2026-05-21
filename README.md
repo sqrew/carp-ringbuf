@@ -6,9 +6,15 @@ A generic fixed-capacity circular buffer for the [Carp language](https://github.
 
 - **Generic Support:** Store any Carp type.
 - **Fixed Capacity:** Pre-allocate memory for performance and predictability.
-- **Automatic Overwrite:** Pushing to a full buffer automatically overwrites the oldest element.
+- **Multiple Push Modes:**
+    - `push!`: Automatically overwrites the oldest element when full (standard ring buffer behavior).
+    - `push-strict!`: Asserts that the buffer is not full.
+    - `try-push!`: Returns `true` if successful, `false` if full (no overwrite).
+- **Deque-like Operations:** `pop!` (front) and `pop-back!`.
+- **Random Access:** `get` for relative indexing (0 is oldest).
 - **Order Preserving:** Access elements in FIFO order.
-- **Conversion:** Easily convert the buffer to a standard Carp Array.
+- **Conversion:** Convert the buffer to a standard Carp Array with `to-array`.
+- **Iteration:** Efficiently traverse elements with `foreach`.
 
 ## Installation
 
@@ -32,6 +38,7 @@ Add this to your project by loading `ringbuf.carp`.
       (RingBuf.push! &rb 3)
       (RingBuf.push! &rb 4) ; overwrites 1
       (println* (str &(RingBuf.pop! &rb))) ; Just 2
+      (println* (str &(RingBuf.peek-back &rb))) ; Just 4
       (println* (str &(RingBuf.to-array &rb)))))) ; [3 4]
 ```
 
