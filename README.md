@@ -25,23 +25,10 @@ Add this to your project by loading `ringbuf.carp`.
 (use RingBuf)
 ```
 
-## Usage
 
-```clojure
-(use RingBuf)
+## Examples
 
-(defn main []
-  (let [rb (RingBuf.new 3 0)] ; capacity of 3, default value 0
-    (do
-      (RingBuf.push! &rb 1)
-      (RingBuf.push! &rb 2)
-      (RingBuf.push! &rb 3)
-      (RingBuf.push! &rb 4) ; overwrites 1
-      (println* (str &(RingBuf.pop! &rb))) ; Just 2
-      (println* (str &(RingBuf.peek-back &rb))) ; Just 4
-      (println* (str &(RingBuf.to-array &rb)))))) ; [3 4]
-```
-
+See [examples.md](examples.md) for usage examples.
 ## Running Tests
 
 ```bash
